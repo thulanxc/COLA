@@ -28,7 +28,6 @@ def load_csv_data(file_path):
     raise ValueError(f"Unable to read {file_path} with any of the encodings: {', '.join(encodings)}")
 
 def get_completion_with_role(role, instruction, content):
-    max_retries = 100000
     messages = [
         {"role": "system", "content": f"You are a {role}."},
         {"role": "user", "content": f"{instruction}\n{content}"}
