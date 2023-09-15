@@ -33,40 +33,21 @@ def get_completion_with_role(role, instruction, content):
         {"role": "system", "content": f"You are a {role}."},
         {"role": "user", "content": f"{instruction}\n{content}"}
     ]
-
-    for i in range(max_retries):
-        try:
-            response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
-                messages=messages,
-                temperature=0
-            )
-            return response.choices[0].message["content"]
-        except (openai.error.RateLimitError, openai.error.ServiceUnavailableError, openai.error.APIError, openai.error.Timeout,openai.error.APIConnectionError,openai.error.InvalidRequestError,openai.error.AuthenticationError):
-            if i < max_retries - 1:
-                time.sleep(2)
-            else:
-                logging.error('Max retries reached for prompt: ' + content)
-                return "Error"
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=messages,
+        temperature=0
+    )
+    return response.choices[0].message["content"]
 
 def get_completion(prompt):
-    max_retries = 100000
-
-    for i in range(max_retries):
-        try:
-            messages = [{"role": "user", "content": prompt}]
-            response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
-                messages=messages,
-                temperature=0
-            )
-            return response.choices[0].message["content"]
-        except (openai.error.RateLimitError, openai.error.ServiceUnavailableError, openai.error.APIError, openai.error.Timeout,openai.error.APIConnectionError,openai.error.InvalidRequestError,openai.error.AuthenticationError):
-            if i < max_retries - 1:
-                time.sleep(2)
-            else:
-                logging.error('Max retries reached for prompt: ' + prompt)
-                return "Error"
+    messages = [{"role": "user", "content": prompt}]
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=messages,
+        temperature=0
+    )
+    return response.choices[0].message["content"]
             
 def linguist_analysis(tweet):
     instruction = "Accurately and concisely explain the linguistic elements in the sentence and how these elements affect meaning, including grammatical structure, tense and inflection, virtual speech, rhetorical devices, lexical choices and so on. Do nothing else."
