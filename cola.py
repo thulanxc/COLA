@@ -58,7 +58,7 @@ def expert_analysis(tweet, target):
     return get_completion_with_role(role, instruction, tweet)
 
 def user_analysis(tweet):
-    instruction = "Analyze the following sentence, focusing on the content, emotional tone, implied meaning, and so on. Do nothing else."
+    instruction = "Analyze the following sentence, focusing on the content, hashtags, Internet slang and colloquialisms, emotional tone, implied meaning, and so on. Do nothing else."
     return get_completion_with_role("heavy social media user", instruction, tweet)
 
 def stance_analysis(tweet, ling_response, expert_response, user_response, target, stance):
