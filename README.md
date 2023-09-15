@@ -1,2 +1,2 @@
 # COLA
-Code for stance detection with collaborative role-infused LLM-based agents.
+Code for Stance Detection with Collaborative Role-Infused LLM-Based Agents (Submitted to ICWSM 2024).
