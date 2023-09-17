@@ -9,14 +9,14 @@ from multiprocessing import Pool
 openai.api_key = 'your-api-key'  
 
 #assign experts for target
-target_role_map = {
-    "Atheism": "theologian",
-    "Climate Change is a Real Concern": "environmental scientist",
-    "Feminist Movement": "sociologist",
-    "Hillary Clinton": "political scientist",
-    "Legalization of Abortion": "sociologist",
-    "Donald Trump": "political scientist"
-}
+target_role_map ={}
+
+#for example
+# target_role_map ={ 
+#     "Climate Change is a Real Concern": "environmental scientist",
+#     "Feminist Movement": "sociologist",
+#     "Hillary Clinton": "political scientist"
+# }
 
 def load_csv_data(file_path):
     encodings = ['utf-8', 'latin1', 'ISO-8859-1']
@@ -47,7 +47,8 @@ def get_completion(prompt):
         temperature=0
     )
     return response.choices[0].message["content"]
-            
+
+#you may adjust these functions according to your text and target of interest.
 def linguist_analysis(tweet):
     instruction = "Accurately and concisely explain the linguistic elements in the sentence and how these elements affect meaning, including grammatical structure, tense and inflection, virtual speech, rhetorical devices, lexical choices and so on. Do nothing else."
     return get_completion_with_role("linguist", instruction, tweet)
